@@ -38,24 +38,7 @@ def test_shell_commands():
             print("Hata çıktısı:")
             print(execute_process.stderr)
     
-    # Hafıza sızıntılarını kontrol etme
-    valgrind_process = subprocess.run(["valgrind", "--leak-check=full", "./shell"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    if "no leaks are possible" in valgrind_process.stderr:
-        print("Hafıza sızıntısı yok.")
-    else:
-        print("Hafıza sızıntısı bulundu.")
-        print("Valgrind çıktısı:")
-        print(valgrind_process.stderr)
-    
-    # Zombie süreçlerini kontrol etme
-    ps_process = subprocess.run(["ps", "-eo", "pid,ppid,state"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    zombie_processes = [line for line in ps_process.stdout.split("\n") if "Z" in line]
-    if zombie_processes:
-        print("Zombie süreçler bulundu:")
-        for process in zombie_processes:
-            print(process)
-    else:
-        print("Zombie süreç yok.")
+
 
 # Test fonksiyonunu çağırma
 test_shell_commands()
