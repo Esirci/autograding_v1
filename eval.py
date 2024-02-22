@@ -18,7 +18,8 @@ def test_shell_commands():
     
     # Test edilecek komutlar ve argümanları
     test_commands = [
-        "ls > cmd1.txt",
+        #"ls > cmd1.txt",
+        "echo "aaa,bb,cc,dd" | grep "aa"",
         "q"
         #"grep "portakal" searchFile.txt",
         #"cat file.txt",
