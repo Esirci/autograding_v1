@@ -1,7 +1,7 @@
 import subprocess
 
 def run_job():
-    ret = subprocess.run(["echo "aaa,bb,cc,dd" | grep "aa""], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    ret = subprocess.run(["echo", "aaa,bb,cc,dd", "|", "grep", "aa"], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     print("Çıktı:")
     print(execute_process.stdout)
     return ret.stdout.decode(('UTF-8'))
