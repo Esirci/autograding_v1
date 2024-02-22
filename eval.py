@@ -18,7 +18,7 @@ def run_tests():
     
     # Derlenen programı çalıştırma
     # Kullanıcıdan girdileri alarak çalıştırma
-    user_input = input("Programa girmek istediğiniz veriyi girin: ")
+    user_input = input("ls")
     execute_process = subprocess.run(["./hw2", user_input], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
     if execute_process.returncode != 0:
