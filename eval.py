@@ -6,10 +6,12 @@ def run_job(cmd):
     
 if __name__ == '__main__':
     # Compile
-    run_job("gcc main.c")
+    #run_job("gcc main.c")
+    run_job("gcc -Wall -o hw2 hw2.c")
 
     # Run
-    msg = run_job("./a.out").rstrip()
+    #msg = run_job("./a.out").rstrip()
+    msg = run_job("./hw2").rstrip()
     if msg == "Hello World!":
         print("Ok! expected output is corerect.")
     else:
