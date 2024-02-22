@@ -1,7 +1,9 @@
 import subprocess
 
-def run_job(cmd):
-    ret = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+def run_job():
+    ret = subprocess.run("echo "aaa,bb,cc,dd" | grep "aa"", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    print("Çıktı:")
+    print(execute_process.stdout)
     return ret.stdout.decode(('UTF-8'))
 
 
@@ -19,7 +21,7 @@ def test_shell_commands():
     # Test edilecek komutlar ve argümanları
     test_commands = [
         #"ls > cmd1.txt",
-        "echo "aaa,bb,cc,dd" | grep "aa"",
+        #"echo "aaa,bb,cc,dd" | grep "aa"",
         "q"
         #"grep "portakal" searchFile.txt",
         #"cat file.txt",
@@ -42,6 +44,7 @@ def test_shell_commands():
 
 
 # Test fonksiyonunu çağırma
-test_shell_commands()
+#test_shell_commands()
+run_job()
 
 
