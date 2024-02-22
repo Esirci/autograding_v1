@@ -113,7 +113,7 @@ int main(int argc, char const *argv[])
 
 		buffer[bytes_read] = '\0';
 
-		if(strncmp(buffer, ":q", 2) == 0){
+		if(strncmp(buffer, "q", 2) == 0){
 			break;
 		}
 		// Check pipe and redirections have or not
