@@ -74,7 +74,7 @@ int main(int argc, char const *argv[])
 
 	char enter_shell[2] = {"$ "};
 
-	print("Hello World!");
+	printf("Hello World!\n");
 
 	while(TRUE){
 
