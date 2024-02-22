@@ -6,9 +6,9 @@ def run_job(cmd):
 
 
 
-def run_tests():
-    # main.c dosyasını derleme
-    compile_process = subprocess.run(["gcc", "hw2.c", "-o", "hw2"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+def test_shell_commands():
+    # C programını derleme
+    compile_process = subprocess.run(["gcc", "-Wall", "hw2.c", "-o", "shell"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     
     if compile_process.returncode != 0:
         print("Hata: Kod derlenemedi.")
@@ -16,23 +16,47 @@ def run_tests():
         print(compile_process.stderr)
         return
     
-    # Derlenen programı çalıştırma
-    # Kullanıcıdan girdileri alarak çalıştırma
-    user_input = "ls > file.txt"
-    execute_process = subprocess.run(["./hw2", user_input], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
-    if execute_process.returncode != 0:
-        print("Hata: Program çalıştırılamadı.")
-        print("Hata çıktısı:")
-        print(execute_process.stderr)
-        return
-    
-    # Program çıktısını yazdırma
-    print("Program çıktısı:")
-    print(execute_process.stdout)
+    # Test edilecek komutlar ve argümanları
+    test_commands = [
+        "ls > cmd1.txt"
+        #"grep "portakal" searchFile.txt",
+        #"cat file.txt",
+        #"sed 's/apple/orange/g' searchFile.txt > cmd2.txt"
+    ]
 
+    for command in test_commands:
+        # C programını çalıştırma
+        execute_process = subprocess.run(["./shell"], input=command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+        
+        if execute_process.returncode == 0:
+            print(f"{command} komutu başarıyla çalıştırıldı.")
+            print("Çıktı:")
+            print(execute_process.stdout)
+        else:
+            print(f"{command} komutu çalıştırılamadı.")
+            print("Hata çıktısı:")
+            print(execute_process.stderr)
+    
+    # Hafıza sızıntılarını kontrol etme
+    valgrind_process = subprocess.run(["valgrind", "--leak-check=full", "./shell"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if "no leaks are possible" in valgrind_process.stderr:
+        print("Hafıza sızıntısı yok.")
+    else:
+        print("Hafıza sızıntısı bulundu.")
+        print("Valgrind çıktısı:")
+        print(valgrind_process.stderr)
+    
+    # Zombie süreçlerini kontrol etme
+    ps_process = subprocess.run(["ps", "-eo", "pid,ppid,state"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    zombie_processes = [line for line in ps_process.stdout.split("\n") if "Z" in line]
+    if zombie_processes:
+        print("Zombie süreçler bulundu:")
+        for process in zombie_processes:
+            print(process)
+    else:
+        print("Zombie süreç yok.")
 
 # Test fonksiyonunu çağırma
-run_tests()
+test_shell_commands()
 
 
