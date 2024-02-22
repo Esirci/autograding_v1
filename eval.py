@@ -11,9 +11,9 @@ if __name__ == '__main__':
     # Run
     msg = run_job("./a.out").rstrip()
     if msg == "Hello World!":
-        print("Ok!")
+        print("Ok! expected output is corerect.")
     else:
-        print("Error. The correct answer is `Hello World!`, but your outupt is:")
+        print("Error. The correct answer is `Hello World!`, but your output is:")
         print("```")
         print(msg)
         print("```")
